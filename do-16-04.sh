@@ -15,18 +15,21 @@ export DEBIAN_FRONTEND=noninteractive;
 # sudo_user=''    #Your username
 # sudo_user_passwd=''     #your password
 root_passwd='do1604nginx'    #Your new root password
+pass_file='/root/mysql_passwd.txt'
 # ssh_port='22'   #Your SSH port if you wish to change it from the default
 #-- UDV End --#
 
 #creating random passwords
-touch /root/mysql_passwd.txt
+create_passwords() {
+pass_file = '/root/mysql_passwd.txt'
+touch pass_file
 root_mysql_passwd=`dd if=/dev/urandom bs=1 count=16 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev | tr -dc 'a-zA-Z0-9'`;
 wp_mysql_passwd=`dd if=/dev/urandom bs=1 count=8 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev | tr -dc 'a-zA-Z0-9'`;
-echo "root mysql password: $root_mysql_passwd" >> /root/mysql_passwd.txt
-echo "wordpress password: $wp_mysql_passwd" >> /root/mysql_passwd.txt
+echo "root mysql password: $root_mysql_passwd" >> pass_file
+echo "wordpress password: $wp_mysql_passwd" >> pass_file
+}
 
-install_packages()
-{
+install_packages() {
     #uff8_fix
     install_php_7
     install_mysql_57
@@ -156,10 +159,15 @@ set_mysql() {
     echo "Set up database user"
     sleep 1
     # Set up database user
-    /usr/bin/mysqladmin -u root -h localhost create wordpress;
-    /usr/bin/mysqladmin -u root -h localhost password $root_mysql_passwd;
-    /usr/bin/mysql -uroot -p$root_mysql_passwd -e "CREATE USER wordpress@localhost IDENTIFIED BY '"$wp_mysql_passwd"'";
-    /usr/bin/mysql -uroot -p$root_mysql_passwd -e "GRANT ALL PRIVILEGES ON wordpress.* TO wordpress@localhost";
+    root_mysql_passwd=`sed -n "s/^.*root mysql password:\s*\(\S*\).*$/\1/p" $pass_file`;
+    echo $root_mysql_passwd;
+    echo sed -n "s/^.*root mysql password:\s*\(\S*\).*$/\1/p" $pass_file;
+    wp_mysql_passwd=`sed -n "s/^.*wordpress password:\s*\(\S*\).*$/\1/p" $pass_file`;
+    echo $wp_mysql_passwd;
+    echo sed -n "s/^.*wordpress password:\s*\(\S*\).*$/\1/p" $pass_file;
+    echo /usr/bin/mysqladmin -u root -h localhost create wordpress -p$root_mysql_passwd;
+    echo /usr/bin/mysql -uroot -p$root_mysql_passwd -e "CREATE USER wordpress@localhost IDENTIFIED BY '"$wp_mysql_passwd"'";
+    echo /usr/bin/mysql -uroot -p$root_mysql_passwd -e "GRANT ALL PRIVILEGES ON wordpress.* TO wordpress@localhost";
 }
 
 set_php_7() {
