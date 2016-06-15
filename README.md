@@ -17,6 +17,7 @@ runcmd:
 - ./lemp-wordpress-16-04.sh
 ```
 
+Your passwords will be stored in /root/mysql_passwd.txt
 
 If you want to set different web site and subfolder for installation edit those lines:
 
