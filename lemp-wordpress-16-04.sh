@@ -58,12 +58,12 @@ install_packages() {
 }
 
 restart_packages() {
-	echo "Restarting Nginx, PHP-FPM and MySQL."
-	sleep 1
-	sudo systemctl restart php7.0-fpm
-	service nginx restart
-	service mysql restart
-	echo "Packages restarted."
+    echo "Restarting Nginx, PHP-FPM and MySQL."
+    sleep 1
+    sudo systemctl restart php7.0-fpm
+    service nginx restart
+    service mysql restart
+    echo "Packages restarted."
 }
 
 uff8_fix() {
