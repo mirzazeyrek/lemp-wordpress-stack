@@ -5,7 +5,8 @@ This file is only tested on DigitalOcean. Please feel free to contribute on furt
 
 Use this user script while creating the droplet:
 
-\#cloud-config
+```
+#cloud-config
 chpasswd:
   list: |
     root:yourrootpassword
@@ -14,3 +15,4 @@ runcmd:
 - wget https://raw.githubusercontent.com/mirzazeyrek/lemp-wordpress-stack/master/lemp-wordpress-16-04.sh
 - chmod +x lemp-wordpress-16-04.sh
 - ./lemp-wordpress-16-04.sh
+```
