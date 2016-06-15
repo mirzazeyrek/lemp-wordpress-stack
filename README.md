@@ -40,7 +40,7 @@ chpasswd:
   expire: False
 runcmd:
 - wget https://yourwebsite.com/edited-lemp-wordpress-16-04.sh
-- chmod +x lemp-wordpress-16-04.sh
-- ./lemp-wordpress-16-04.sh
-```
+- chmod +x edited-lemp-wordpress-16-04.sh
+- ./edited-lemp-wordpress-16-04.sh
+``` 
 
