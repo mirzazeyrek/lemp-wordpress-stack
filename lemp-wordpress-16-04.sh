@@ -13,11 +13,12 @@ export DEBIAN_FRONTEND=noninteractive;
 #initial values
 init() {
     pass_file='/root/mysql_passwd.txt'
-    # leave sub_folder empty if you don't want to make installation to a sub_folder
+    # leave sub_folder empty if you don't want to make installation to a subfolder
     sub_folder=""
     web_address="localhost"
-    #sub_folder="jupiter5"
-    #web_address="demo2.artbees.net"
+    # for making an installation to www.mywebsite.com/myblog/
+    #sub_folder="myblog"
+    #web_address="www.mywebsite.com"
 }
 
 #creating installation folders
