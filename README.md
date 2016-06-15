@@ -5,6 +5,8 @@ This file is only tested on DigitalOcean. Please feel free to contribute on furt
 
 Use this user script while creating the droplet:
 
+![image](https://cloud.githubusercontent.com/assets/6233650/16084574/04d43c8a-3322-11e6-81f1-a46e31f5728e.png) 
+
 ```
 #cloud-config
 chpasswd:
