@@ -172,6 +172,10 @@ set_nginx() {
     cp -avr /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
     cp -avr /etc/nginx/sites-available/default.bak /etc/nginx/sites-available/$web_address
     #rm -avr /etc/nginx/sites-available/default
+    # adding subfolder redirections
+    if [ "$sub_folder" != "" ]; then
+    sed -i "s/server_name _;/server_name _;\n\n\tlocation \/$sub_folder {\n\t\tindex index.php;\n\t\ttry_files \$uri \$uri\/ \/$sub_folder\/index.php;\n\t}/" /etc/nginx/sites-available/$web_address
+    fi
     # making default settings
     sed -i "s/try_files \$uri \$uri\/ =404;/try_files \$uri \$uri\/ \/index.php\$is_args\$args;/" /etc/nginx/sites-available/$web_address
     sed -i "s/server_name _;/server_name $web_address;/" /etc/nginx/sites-available/$web_address
