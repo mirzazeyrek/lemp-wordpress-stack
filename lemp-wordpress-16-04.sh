@@ -16,8 +16,8 @@ init() {
     # leave sub_folder empty if you don't want to make installation to a sub_folder
     sub_folder=""
     web_address="localhost"
-    #sub_folder="jupiter5"
-    #web_address="demo2.artbees.net"
+    #sub_folder="myblog"
+    #web_address="www.mywebsite.com"
 }
 
 #creating installation folders
