@@ -176,6 +176,12 @@ set_nginx() {
     if [ "$sub_folder" != "" ]; then
     sed -i "s/server_name _;/server_name _;\n\n\tlocation \/$sub_folder {\n\t\tindex index.php;\n\t\ttry_files \$uri \$uri\/ \/$sub_folder\/index.php;\n\t}/" /etc/nginx/sites-available/$web_address
     fi
+    # log and cache settings
+    sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/favicon.ico {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
+    sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/robots.txt {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
+    sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/favicon.ico {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
+    sed -i "s/server_name _;/server_name _;\n\n\tlocation ~* \\\.(css\|gif\|ico\|jpeg\|jpg\|js\|png)\$ {\n\t\texpires 30d;\n\t\tlog_not_found off;\n\t}/" /etc/nginx/sites-available/$web_address
+    #location = /robots.txt { log_not_found off; access_log off; allow all; }
     # making default settings
     sed -i "s/try_files \$uri \$uri\/ =404;/try_files \$uri \$uri\/ \/index.php\$is_args\$args;/" /etc/nginx/sites-available/$web_address
     sed -i "s/server_name _;/server_name $web_address;/" /etc/nginx/sites-available/$web_address
