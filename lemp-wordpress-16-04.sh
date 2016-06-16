@@ -227,6 +227,7 @@ set_wordpress() {
     sleep 1
     mv /tmp/wordpress/* $full_path
     cp $full_path/wp-config-sample.php $full_path/wp-config.php;
+    sed -i "s/'WP_DEBUG', false);/'WP_DEBUG', false);\r\ndefine('WP_MEMORY_LIMIT', '96M');/" $full_path/wp-config.php;
     sed -i "s|'DB_NAME', 'database_name_here'|'DB_NAME', '$wp_database'|g" $full_path/wp-config.php;
     sed -i "s/'DB_USER', 'username_here'/'DB_USER', '$wp_mysql_user'/g" $full_path/wp-config.php;
     sed -i "s/'DB_PASSWORD', 'password_here'/'DB_PASSWORD', '$wp_mysql_passwd'/g" $full_path/wp-config.php;
