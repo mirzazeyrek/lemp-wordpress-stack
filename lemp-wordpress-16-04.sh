@@ -176,12 +176,25 @@ set_nginx() {
     if [ "$sub_folder" != "" ]; then
     sed -i "s/server_name _;/server_name _;\n\n\tlocation \/$sub_folder {\n\t\tindex index.php;\n\t\ttry_files \$uri \$uri\/ \/$sub_folder\/index.php;\n\t}/" /etc/nginx/sites-available/$web_address
     fi
-    # log and cache settings
+    # log and browser cache settings
     sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/favicon.ico {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
     sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/robots.txt {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
-    sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/favicon.ico {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
     sed -i "s/server_name _;/server_name _;\n\n\tlocation ~* \\\.(css\|gif\|ico\|jpeg\|jpg\|js\|png)\$ {\n\t\texpires 30d;\n\t\tlog_not_found off;\n\t}/" /etc/nginx/sites-available/$web_address
-    #location = /robots.txt { log_not_found off; access_log off; allow all; }
+    # activate gzip
+    if [ ! -f /etc/nginx/nginx.conf.bak ]; then
+    cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
+    fi
+    cp /etc/nginx/nginx.conf.bak /etc/nginx/nginx.conf
+    sed -i "s/# gzip_vary on;/gzip_vary on;/" /etc/nginx/nginx.conf
+    sed -i "s/# gzip_proxied any;/gzip_proxied any;/" /etc/nginx/nginx.conf
+    sed -i "s/# gzip_comp_level 6;/gzip_comp_level 6;/" /etc/nginx/nginx.conf
+    sed -i "s/# gzip_buffers 16 8k;/gzip_buffers 16 8k;/" /etc/nginx/nginx.conf
+    sed -i "s/# gzip_http_version 1.1;/gzip_http_version 1.1;/" /etc/nginx/nginx.conf
+    sed -i "s/# gzip_min_length 256;/gzip_min_length 256;/" /etc/nginx/nginx.conf
+    sed -i "s/# gzip_types text\/plain/gzip_types text\/plain application\/vnd.ms\-fontobject application\/x-font-ttf font\/opentype image\/svg+xml image\/x-icon/" /etc/nginx/nginx.conf
+    # set file upload settings 20 M and 6 min max
+    sed -i "s/sendfile on;/sendfile on;\n\tclient_max_body_size 20M;/" /etc/nginx/nginx.conf
+    sed -i "s/sendfile on;/sendfile on;\n\tsend_timeout 360s;/" /etc/nginx/nginx.conf
     # making default settings
     sed -i "s/try_files \$uri \$uri\/ =404;/try_files \$uri \$uri\/ \/index.php\$is_args\$args;/" /etc/nginx/sites-available/$web_address
     sed -i "s/server_name _;/server_name $web_address;/" /etc/nginx/sites-available/$web_address
