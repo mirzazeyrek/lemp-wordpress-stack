@@ -21,7 +21,7 @@ init() {
     #web_address="www.mywebsite.com"
 
     multi_site=0
-    # for multi site installation unomment this line
+    # for multi site installation uncomment this line
     #multi_site=1
 }
 
