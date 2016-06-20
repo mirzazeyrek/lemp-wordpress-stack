@@ -205,7 +205,7 @@ set_nginx() {
     # log and browser cache settings
     sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/favicon.ico {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
     sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/robots.txt {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
-    sed -i "s/server_name _;/server_name _;\n\n\tlocation ~* \\\.(ogg\|ogv\|svg\|svgz\|eot\|otf\|woff\|mp4\|ttf\|rss\|atom\|jpg\|jpeg\|gif\|png\|ico\|zip\|tgz\|gz\|rar\|bz2\|doc\|xls\|exe\|ppt\|tar\|mid\|midi\|wav\|bmp\|rtf)\$ {\n\t\texpires 30d;\n\t\tlog_not_found off;\n\t}/" /etc/nginx/sites-available/$web_address
+    sed -i "s/server_name _;/server_name _;\n\n\tlocation ~* \\\.(js|css|ogg\|ogv\|svg\|svgz\|eot\|otf\|woff\|mp4\|ttf\|rss\|atom\|jpg\|jpeg\|gif\|png\|ico\|zip\|tgz\|gz\|rar\|bz2\|doc\|xls\|exe\|ppt\|tar\|mid\|midi\|wav\|bmp\|rtf)\$ {\n\t\texpires 30d;\n\t\tlog_not_found off;\n\t}/" /etc/nginx/sites-available/$web_address
     # activate gzip
     if [ ! -f /etc/nginx/nginx.conf.bak ]; then
     cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
