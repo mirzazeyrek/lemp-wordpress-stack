@@ -32,7 +32,10 @@ If you want to set different web site and subfolder for installation edit those 
     web_address="www.mywebsite.com"
 ```
 
-Upload the edited file somewhere and use it for your installation:
+Upload the edited file somewhere and use it for your installation and please make sure you have set the correct settings for the file:
+
+1- Unix line endings
+2- UTF-8 WITHOUT BOM.
 
 ```
 #cloud-config
