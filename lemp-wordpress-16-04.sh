@@ -171,7 +171,7 @@ set_php_7() {
     sed -i "s/post_max_size = 8M/post_max_size = 20M/" /etc/php/7.0/fpm/php.ini
     sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.0/fpm/php.ini
     sed -i "s/max_input_time = 60/max_input_time = 120/" /etc/php/7.0/fpm/php.ini
-    sed -i "s/; max_input_vars = 1000/max_input_vars = 4000/" /etc/php/7.0/fpm/php.ini
+    sed -i "s/; max_input_vars = 1000/max_input_vars = 6000/" /etc/php/7.0/fpm/php.ini
     # Configure Opcache
     echo "opcache.memory_consumption=512" >> /etc/php/7.0/fpm/conf.d/10-opcache.ini
     echo "opcache.max_accelerated_files=50000" >> /etc/php/7.0/fpm/conf.d/10-opcache.ini
