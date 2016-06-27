@@ -207,7 +207,7 @@ set_nginx() {
     fi
     # adding subfolder redirections
     if [ "$sub_folder" != "" ]; then
-    sed -i "s/server_name _;/server_name _;\n\n\tlocation \/$sub_folder {\n\t\tindex index.php;\n\t\ttry_files \$uri \$uri\/ \/$sub_folder\/index.php;\n\t}/" /etc/nginx/sites-available/$web_address
+    sed -i "s/server_name _;/server_name _;\n\n\tlocation \/$sub_folder {\n\t\tindex index.php;\n\t\ttry_files \$uri \$uri\/ \/$sub_folder\/index.php\?\$args;\n\t}/" /etc/nginx/sites-available/$web_address
     fi
     # log and browser cache settings
     sed -i "s/server_name _;/server_name _;\n\n\tlocation = \/favicon.ico {\n\t\tlog_not_found off;\n\t\taccess_log off;\n\t}/" /etc/nginx/sites-available/$web_address
