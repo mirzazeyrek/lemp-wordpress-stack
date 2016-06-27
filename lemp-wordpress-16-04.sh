@@ -87,6 +87,13 @@ uff8_fix() {
     export LANG=en_US.UTF-8
 }
 
+add_apt_repository() {
+	# fixing add-apt-repository: command not found error 
+	echo "fixing add-apt-repository: command not found error"
+	sleep 1
+	apt-get install -y software-properties-common python-software-properties
+}
+
 general_update() {
     echo "Updating packages."
     sleep 1
@@ -298,7 +305,8 @@ rm_temp() {
     rm /tmp/wordpress.zip
 }
 
-#uff8_fix
+uff8_fix
+add_apt_repository
 init
 create_folders
 set_passwords
