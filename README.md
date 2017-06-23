@@ -1,5 +1,5 @@
 # LEMP WORDPRESS STACK
-One click installation for latest wordpress and php 7.0 versions on ubuntu 16.04
+One click installation for latest wordpress and php 7.1 versions on ubuntu 16.04
 
 This file is only tested on DigitalOcean. Please feel free to contribute on further development and please report issues.
 
