@@ -72,7 +72,7 @@ install_packages() {
 restart_packages() {
     echo "Restarting Nginx, PHP-FPM and MySQL."
     sleep 1
-    sudo systemctl restart php7.0-fpm
+    sudo systemctl restart php7.1-fpm
     service nginx restart
     service mysql restart
     echo "Packages restarted."
@@ -132,9 +132,9 @@ install_php_7() {
     # -y flag means automatically say yes for command prompt.
     sudo add-apt-repository -y ppa:ondrej/php
     sudo apt-get update
-    echo "Installing PHP 7.0 packages"
+    echo "Installing PHP 7.1 packages"
     sleep 1
-    apt-get -y install screen build-essential libcurl3 libmcrypt4 libmemcached11 libxmlrpc-epi0 php7.0-cli php7.0-common php7.0-curl php7.0-fpm php7.0-gd php7.0-intl php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql php7.0-opcache php7.0-readline php7.0-xml php7.0-xmlrpc psmisc libmcrypt-dev mcrypt php-pear php-mysql php-mbstring php-mcrypt php-xml php-intl libmhash2 php-common php-memcached
+    apt-get -y install screen build-essential libcurl3 libmcrypt4 libmemcached11 libxmlrpc-epi0 php7.1-cli php7.1-common php7.1-curl php7.1-fpm php7.1-gd php7.1-intl php7.1-json php7.1-mbstring php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline php7.1-xml php7.1-xmlrpc psmisc libmcrypt-dev mcrypt php-pear php-mysql php-mbstring php-mcrypt php-xml php-intl libmhash2 php-common php-memcached
 }
 
 set_packages()
@@ -170,22 +170,22 @@ set_mysql() {
 }
 
 set_php_7() {
-    echo "set php 7"
+    echo "set php 7.1"
     sleep 1
     # Configure PHP by mostly increasing default variables!
-    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.0/fpm/php.ini
-    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 20M/" /etc/php/7.0/fpm/php.ini
-    sed -i "s/post_max_size = 8M/post_max_size = 20M/" /etc/php/7.0/fpm/php.ini
-    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.0/fpm/php.ini
-    sed -i "s/max_input_time = 60/max_input_time = 120/" /etc/php/7.0/fpm/php.ini
-    sed -i "s/; max_input_vars = 1000/max_input_vars = 6000/" /etc/php/7.0/fpm/php.ini
+    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.1/fpm/php.ini
+    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 20M/" /etc/php/7.1/fpm/php.ini
+    sed -i "s/post_max_size = 8M/post_max_size = 20M/" /etc/php/7.1/fpm/php.ini
+    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.1/fpm/php.ini
+    sed -i "s/max_input_time = 60/max_input_time = 120/" /etc/php/7.1/fpm/php.ini
+    sed -i "s/; max_input_vars = 1000/max_input_vars = 6000/" /etc/php/7.1/fpm/php.ini
     # Configure Opcache
-    echo "opcache.memory_consumption=512" >> /etc/php/7.0/fpm/conf.d/10-opcache.ini
-    echo "opcache.max_accelerated_files=50000" >> /etc/php/7.0/fpm/conf.d/10-opcache.ini
-    echo "opcache.revalidate_freq=0" >> /etc/php/7.0/fpm/conf.d/10-opcache.ini
-    echo "opcache.consistency_checks=1" >> /etc/php/7.0/fpm/conf.d/10-opcache.ini
+    echo "opcache.memory_consumption=512" >> /etc/php/7.1/fpm/conf.d/10-opcache.ini
+    echo "opcache.max_accelerated_files=50000" >> /etc/php/7.1/fpm/conf.d/10-opcache.ini
+    echo "opcache.revalidate_freq=0" >> /etc/php/7.1/fpm/conf.d/10-opcache.ini
+    echo "opcache.consistency_checks=1" >> /etc/php/7.1/fpm/conf.d/10-opcache.ini
     #sed -i "s|listen = 127.0.0.1:9000|listen = /var/run/php5-fpm.sock|" /etc/php5/fpm/pool.d/www.conf;
-    sudo systemctl restart php7.0-fpm
+    sudo systemctl restart php7.1-fpm
 }
 
 set_nginx() {
@@ -241,7 +241,7 @@ set_nginx() {
     # adding .php connection to the nginx
     sed -i "s/#location ~ \\\.php\$ {/location ~ \\\.php\$ {/" /etc/nginx/sites-available/$web_address
     sed -i "s/#\tinclude snippets\/fastcgi-php.conf;/\tinclude snippets\/fastcgi-php.conf;/" /etc/nginx/sites-available/$web_address
-    sed -i "s/#\tfastcgi_pass unix:\/var\/run\/php7.0-fpm.sock;/\tfastcgi_pass unix:\/run\/php\/php7.0-fpm.sock;\n\t\tinclude fastcgi_params;/" /etc/nginx/sites-available/$web_address
+    sed -i "s/#\tfastcgi_pass unix:\/var\/run\/php\/php7.0-fpm.sock;/\tfastcgi_pass unix:\/run\/php\/php7.1-fpm.sock;\n\t\tinclude fastcgi_params;/" /etc/nginx/sites-available/$web_address
     # blocking access from .htaccess
     sed -i "s/#location ~ \/\\\.ht {/location ~ \/\\\.ht {/" /etc/nginx/sites-available/$web_address
     sed -i "s/#\tdeny all;/\tdeny all;/" /etc/nginx/sites-available/$web_address
@@ -313,4 +313,7 @@ set_passwords
 get_passwords
 install_packages
 set_packages
+restart_packages
 rm_temp
+
+echo "all set.";
