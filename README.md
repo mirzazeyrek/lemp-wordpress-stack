@@ -1,8 +1,18 @@
 # LEMP WORDPRESS STACK
-One click installation for latest wordpress and php 7.1 versions on ubuntu 16.04
+One step installation for latest wordpress and php 7.1 versions on ubuntu 16.04.
 
-This file is only tested on DigitalOcean. Please feel free to contribute on further development and please report issues.
+This file is tested on DigitalOcean & Linode. Please feel free to contribute on further development and please report issues.
 
+# MANUAL INSTALLATION
+
+Login as root:
+
+```
+    wget https://raw.githubusercontent.com/mirzazeyrek/lemp-wordpress-stack/master/lemp-wordpress-16-04.sh`
+    bash lemp-wordpress-16-04.sh
+```
+
+# DIGITALOCEAN INSTALLATION
 Use this user script while creating the droplet:
 
 ![image](https://cloud.githubusercontent.com/assets/6233650/16084574/04d43c8a-3322-11e6-81f1-a46e31f5728e.png) 
