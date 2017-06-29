@@ -8,7 +8,7 @@ This file is tested on DigitalOcean & Linode. Please feel free to contribute on 
 Login as root:
 
 ```
-    wget https://raw.githubusercontent.com/mirzazeyrek/lemp-wordpress-stack/master/lemp-wordpress-16-04.sh`
+    wget https://raw.githubusercontent.com/mirzazeyrek/lemp-wordpress-stack/master/lemp-wordpress-16-04.sh
     bash lemp-wordpress-16-04.sh
 ```
 
