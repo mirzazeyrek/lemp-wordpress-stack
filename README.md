@@ -60,3 +60,4 @@ runcmd:
 - ./edited-lemp-wordpress-16-04.sh
 ``` 
 
+If you are looking for professional premium help about WordPress Server installation and optimization; feel free to reach me mirzazeyrek (at) gmail.com.
